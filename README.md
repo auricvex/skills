@@ -13,6 +13,18 @@ Both skills enforce the same discipline: multi-agent fan-out when available, eve
 
 ## Install
 
+### Via the skills CLI (easiest)
+
+```bash
+npx skills add auricvex/skills
+# or with Bun
+bunx skills add auricvex/skills
+```
+
+Useful flags: `--skill redteam-spec` (install one skill), `-g` (global install), `-a claude-code` (target a specific agent), `-y` (skip prompts), `--list` (preview without installing). After installing, restart your agent so it picks up the new skills.
+
+### Manual
+
 Copy a skill folder into your agent's skills directory:
 
 - Claude Code: `~/.claude/skills/` (personal) or `.claude/skills/` (project)
