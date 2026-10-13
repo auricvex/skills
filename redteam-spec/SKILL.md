@@ -8,6 +8,8 @@ description: "Red-team audit a technical specification (protocol, architecture, 
 ## Purpose
 Attack a technical specification to find every real issue — contradictions, gaps, ambiguities, unenforceable claims, missing definitions — and prove each one is real. A false positive is a failure, not a finding. Never edit the spec; report, the human decides.
 
+Inputs: the spec documents or directories under audit — take from the triggering request when present; ask for what's missing (see Operating Rules).
+
 ## Workflow
 
 ### 1. Fan out (multi-agent mandatory when available)
@@ -29,9 +31,10 @@ Per finding: ID, severity, one-line title, spec sections with exact quoted words
 3. If not the first audit round: explicit convergence statement ("Round N found 0 new critical/major → spec declared STABLE" / "Round N found K new major → one more round authorized").
 
 ## Operating Rules
-1. Scope box: only the documents under audit. Out-of-scope → parked list, no elaboration.
-2. No spec growth: never propose new features, capabilities, or sections. New ideas → parking lot, unelaborated. The spec must not grow because it was audited.
-3. Convergence: first round reports everything verified; later rounds report only new critical/major findings. A round with zero new critical/major = STABLE — declare it and stop scheduling audits. Never run another round merely because "there might be more".
-4. Fix budget: report, don't fix in the same session unless explicitly authorized. If authorized: critical first, then major, then stop. Minors batch for a later polish pass.
-5. Decision freeze: the human's prior decisions are frozen — never re-litigate. A finding conflicting with one is reported as "conflicts with a frozen prior decision" and left for the human.
-6. Time-box: agree a clock limit and/or max verification passes before starting; when hit, report coverage honestly instead of expanding.
+1. Input discipline: the required input is the spec documents under audit. Take it from the triggering request when present; if missing, ask the user with the available question/options tools — one question at a time. Never guess paths, invent defaults, or start the audit with missing inputs.
+2. Scope box: only the documents under audit. Out-of-scope → parked list, no elaboration.
+3. No spec growth: never propose new features, capabilities, or sections. New ideas → parking lot, unelaborated. The spec must not grow because it was audited.
+4. Convergence: first round reports everything verified; later rounds report only new critical/major findings. A round with zero new critical/major = STABLE — declare it and stop scheduling audits. Never run another round merely because "there might be more".
+5. Fix budget: report, don't fix in the same session unless explicitly authorized. If authorized: critical first, then major, then stop. Minors batch for a later polish pass.
+6. Decision freeze: the human's prior decisions are frozen — never re-litigate. A finding conflicting with one is reported as "conflicts with a frozen prior decision" and left for the human.
+7. Time-box: agree a clock limit and/or max verification passes before starting; when hit, report coverage honestly instead of expanding.

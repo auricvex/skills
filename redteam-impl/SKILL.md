@@ -8,7 +8,7 @@ description: "Red-team audit a software implementation against its spec: conform
 ## Purpose
 Two jobs: (1) conformance — verify the implementation does exactly what the spec says; every deviation is a finding. (2) adversarial — attack it directly for security vulnerabilities, bugs, inefficiency, and undefined behavior, even where the spec is silent. Never rewrite the implementation; report, the human decides.
 
-Inputs come from the triggering request: implementation directory, docs/spec directory, and any additional focus request (which narrows focus but never expands the boundary below; if empty, skip it).
+Inputs: implementation directory, docs/spec directory, and any additional focus request (which narrows focus but never expands the boundary below). Take them from the triggering request when present; ask for what's missing (see Operating Rules).
 
 ## Workflow
 
@@ -37,9 +37,10 @@ Per finding: ID, severity, one-line title, exact location, spec section with quo
 3. If not the first audit round: explicit convergence statement ("Round N found 0 new critical/major → implementation declared STABLE" / "Round N found K new major → one more round authorized").
 
 ## Operating Rules
-1. Scope box: only the implementation and docs directories. Out-of-scope → parked list (max 5 items, one line each).
-2. No redesign: never propose architecture changes, new features, or refactors beyond what the findings require. Bigger ideas → parking lot, unelaborated.
-3. Convergence: first round reports everything verified; later rounds report only new critical/major findings. Zero new critical/major = STABLE — declare it and stop scheduling audits. Never run another round merely because "there might be more".
-4. Fix budget: report, don't fix in the same session unless explicitly authorized. If authorized: critical first, then major, then stop. Minors batch for a later polish pass.
-5. Decision freeze: the human's prior decisions (in the spec or otherwise) are frozen — never re-litigate. Conflicts are reported as "conflicts with a frozen prior decision" and left for the human.
-6. Time-box: agree a clock limit and/or max verification passes before starting; when hit, report coverage honestly instead of expanding.
+1. Input discipline: the required inputs are the implementation directory and the docs directory. Take them from the triggering request when present; for anything missing, ask the user with the available question/options tools — one question at a time. You may ask one optional question about additional focus areas; if the user declines or says none, proceed without it. Never guess paths, invent defaults, or start with missing inputs.
+2. Scope box: only the implementation and docs directories. Out-of-scope → parked list (max 5 items, one line each).
+3. No redesign: never propose architecture changes, new features, or refactors beyond what the findings require. Bigger ideas → parking lot, unelaborated.
+4. Convergence: first round reports everything verified; later rounds report only new critical/major findings. Zero new critical/major = STABLE — declare it and stop scheduling audits. Never run another round merely because "there might be more".
+5. Fix budget: report, don't fix in the same session unless explicitly authorized. If authorized: critical first, then major, then stop. Minors batch for a later polish pass.
+6. Decision freeze: the human's prior decisions (in the spec or otherwise) are frozen — never re-litigate. Conflicts are reported as "conflicts with a frozen prior decision" and left for the human.
+7. Time-box: agree a clock limit and/or max verification passes before starting; when hit, report coverage honestly instead of expanding.
